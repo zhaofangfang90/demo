@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE, chrome=1">
+    <!--<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">-->
+    <title>智能光伏</title>
+    <link href="assert/css/index.css" type="text/css" rel="stylesheet">
+    <script src="assert/js/jquery-1.11.3.min.js"></script>
+    <script src="assert/js/template.js"></script>
+    <script src="assert/js/utils.js"></script>
+    <script src="assert/js/areaData.js"></script>
+    <script src="assert/js/countryData.js"></script>
+    <script src="assert/js/sceneData.js"></script>
+    <script src="assert/js/productData.js"></script>
+    <script src="assert/js/index.js"></script>
+    <!--[if lt IE 9 ]>
+    <script src="http://www.huawei.com/mwc2014/ucmf/groups/public/documents/webasset/mwc_html5shiv.js" ></script>
+    <script src="http://www.huawei.com/ucmf/groups/public/documents/webasset/mwc_respond_min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="container">
+        <!--筛选条件 start-->
+        <div class="filter">
+           <div class="filter_conn">
+
+               <!--区域筛选-->
+               <div id="filter_area_wrapper"></div>
+               <script id="filter_area_template" type="text/html">
+                   <div class="filter_area_title">区域选择</div>
+                    <ul class="filter_area">
+                        {{each areaList as item index}}
+                            <li class="filter_area_item" data-id="{{item.id}}">{{item.name}}</li>
+                        {{/each}}
+                    </ul>
+             </script>
+
+               <!--国家筛选-->
+               <div id="filter_country_wrapper"></div>
+               <script id="filter_country_template" type="text/html">
+                   <ul class="filter_country">
+                       {{each countryList as item index}}
+                            <li class="filter_country_item" data-id="{{item.id}}">{{item.name}}</li>
+                       {{/each}}
+                   </ul>
+               </script>
+
+               <!--场景筛选-->
+               <div id="filter_scene_wrapper"></div>
+               <script id="filter_scene_template" type="text/html">
+                   <div class="filter_scene_title">场景选择</div>
+                   <ul class="filter_scene">
+                       {{each sceneList as item index}}
+                       <li class="filter_scene_item" data-id="{{item.id}}">{{item.name}}</li>
+                       {{/each}}
+                   </ul>
+                </script>
+
+           </div>
+        </div>
+        <!--筛选条件 end-->
+
+        <!--上市计划 start-->
+        <div class="plan">
+            <div class="plan_conn">
+                <div id="filter_product_wrapper"></div>
+                <script type="text/html" id="filter_product_template">
+                    <div class="plan_title">上市计划</div>
+                    <!--时间轴 start-->
+                    <div class="timeline_conn">
+                        <div class="timeline_conn_content">
+                            <div class="line"></div>
+                            <ul class="timeline">
+                                <li class="timeline_item">
+                                    <div class="timeline_date">09<img src="assert/img/17_pic.png" class="timeline_pic"/></div>
+                                </li>
+                                <li class="timeline_item">
+                                    <div class="timeline_date">10</div>
+                                </li>
+                                <li class="timeline_item">
+                                    <div class="timeline_date">11</div>
+                                </li>
+                                <li class="timeline_item">
+                                    <div class="timeline_date">12</div>
+                                </li>
+                                <li class="timeline_item">
+                                    <div class="timeline_date">01<img src="assert/img/18_pic.png" class="timeline_pic"/></div>
+                                </li>
+                                <li class="timeline_item">
+                                    <div class="timeline_date">02</div>
+                                </li>
+                                <li class="timeline_item">
+                                    <div class="timeline_date">03</div>
+                                </li>
+                                <li class="timeline_item">
+                                    <div class="timeline_date">04</div>
+                                </li>
+                                <li class="timeline_item">
+                                    <div class="timeline_date">05</div>
+                                </li>
+                                <li class="timeline_item">
+                                    <div class="timeline_date">06</div>
+                                </li>
+                                <li class="timeline_item">
+                                    <div class="timeline_date">07</div>
+                                </li>
+                                <li class="timeline_item">
+                                    <div class="timeline_date">08</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--时间轴 end-->
+
+                    <!--产品 start-->
+                    {{each mainProductList as item index}}
+                    <div class="product">
+                        <ul class="product_note">
+                            <li class="product_note_item note_item_one">正常</li>
+                            <li class="product_note_item note_item_two">预警</li>
+                            <li class="product_note_item note_item_three">延后</li>
+                        </ul>
+                        <div class="product_title">{{item.name}}</div>
+
+                        <div class="product_list_conn">
+                            {{each item.productList as pItem index}}
+                            <div class="product_list">
+                                <div class="product_left" title="{{pItem.modelDesc}}">{{pItem.name}}</div>
+                                <div class="product_right">
+                                    <ul class="product_right_list">
+                                       {{each pItem.taskList as tItem index}}
+                                            <li class="product_right_item {{tItem.state}}" state="{{tItem.state}}" date="{{tItem.date}}" position="{{tItem.position}}">
+                                                <div class="product_right_item_desc">{{tItem.name}}</div>
+                                                <div class="product_intro">
+                                                    <div class="intro_date">{{tItem.date}}</div>
+                                                    <div class="intro_title">{{tItem.name}}</div>
+                                                    <div class="intro_desc">{{tItem.desc}}</div>
+                                                </div>
+                                            </li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+
+                    </div>
+                    <!--产品 end-->
+                    {{/each}}
+
+                </script>
+
+            </div>
+        </div>
+
+        <!--上市计划 end-->
+
+
+    </div>
+</body>
+</html>
